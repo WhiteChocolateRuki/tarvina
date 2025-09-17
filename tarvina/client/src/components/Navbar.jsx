@@ -1,4 +1,4 @@
-// Navbar.jsx
+
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,16 +10,15 @@ export default function Navbar() {
 
   return (
     <nav className="block w-screen bg-[#0088ff]">
-      {/* custom-navbar sınıfını div'e ekleyin */}
+      {}
       <div className="w-full px-6 custom-navbar flex items-center justify-between">
         
-        {/* Logo */}
+       
         <Link to="/" className="text-xl font-bold hover:opacity-80 transition">
           
         </Link>
 
-        {/* Ortadaki Menü */}
-        {/* custom-navbar-link-container sınıfını ekleyin */}
+        
         <div className="flex custom-navbar-link-container text-base md:text-lg font-semibold">
           <Link to="/" className="hover:opacity-80 transition">
             Blog
@@ -33,7 +32,7 @@ export default function Navbar() {
         </div>
       
 
-        {/* Sağda Auth Buton */}
+        {/* Sağ Auth Buton */}
           <div>
             {token ? (
               <Link

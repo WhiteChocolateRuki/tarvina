@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global font ayarı */
+
 :root {
   font-family: "Josefin Sans", sans-serif;
   line-height: 1.5;
@@ -27,7 +27,7 @@ a {
   color: white;
   font-family: "Josefin Sans", sans-serif;
 }
-/* Başlık ayarı */
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 500;
@@ -39,7 +39,7 @@ p{
 
 }
 
-/* Butonlar için temel düzenleme */
+
 button {
   font-family: "Josefin Sans", sans-serif;
   border: none;
@@ -64,39 +64,39 @@ button {
   padding: 1.25rem;
 } */
 .post-card {
-  margin: 1rem;       /* dış boşluk → her kart diğerinden biraz ayrı dursun */
-  padding: 1.5rem;    /* iç boşluk → yazılar kenara yapışmasın */
-  border-radius: 0.5rem; /* köşeler yuvarlak */
-  background: #ffffff; /* arka plan beyaz */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* hafif gölge */
+  margin: 1rem;       
+  padding: 1.5rem;    
+  border-radius: 0.5rem; 
+  background: #ffffff; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
 }
 .post-card-content {
-  padding: 1rem;        /* içerik ile kenar arasında boşluk */
+  padding: 1rem;        
 }
 .post-card * {
-  padding-left: 0.75rem;   /* soldan boşluk */
-  padding-right: 0.75rem;  /* sağdan boşluk */
+  padding-left: 0.75rem;  
+  padding-right: 0.75rem;  
 }
 
 .post-card h2,
 .post-card p {
-  margin-bottom: 0.5rem;   /* başlık ve paragraflar arasında dikey boşluk */
+  margin-bottom: 0.5rem;   
 }
 
 .read-more-link {
-  display: inline-block;     /* buton gibi dursun */
-  text-align: center;        /* yazı ortalansın */
-  font-size: 0.875rem;       /* text-sm (14px) */
-  font-weight: 600;          /* yarı kalın */
-  color: #ffffff;            /* yazı beyaz */
-  background-color: #0088ff; /* mavi buton */
-  padding: 0.5rem 1rem;      /* iç boşluk (8px 16px) */
-  border-radius: 0.5rem;     /* köşeler yuvarlak */
+  display: inline-block;     
+  text-align: center;       
+  font-size: 0.875rem;        
+  font-weight: 600;          
+  color: #ffffff;           
+  background-color: #0088ff;
+  padding: 0.5rem 1rem;      
+  border-radius: 0.5rem;     
   transition: background-color 0.2s ease-in-out, opacity 0.2s;
 }
 
 .read-more-link:hover {
-  background-color: #004992; /* hoverda biraz koyu mavi */
+  background-color: #004992;
   opacity: 0.9;
 }
 

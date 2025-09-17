@@ -8,7 +8,7 @@ export default function PostCard({ post }) {
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
-      {/* Görsel (opsiyonel) */}
+
       {post.imageUrl && (
         <img
           src={post.imageUrl}
@@ -18,7 +18,7 @@ export default function PostCard({ post }) {
       )}
 
       <div className="p-6 flex flex-col flex-1">
-        {/* Başlık ve Rozetler */}
+
         <div className="flex items-center mb-3">
           <h3 className="text-xl font-bold text-gray-900 mr-2">{post.title}</h3>
 
@@ -34,10 +34,10 @@ export default function PostCard({ post }) {
           )}
         </div>
 
-        {/* İçerik */}
+        
         <p className="text-gray-700 mb-4">{contentExcerpt}</p>
 
-        {/* Yazar + Tarih */}
+       
         <div className="text-sm text-gray-500 mb-4">
           {post.authorId?.name ? (
             <span className="block font-medium">Yazar: {post.authorId.name}</span>
@@ -49,7 +49,6 @@ export default function PostCard({ post }) {
           </span>
         </div>
 
-        {/* Devamını Oku */}
         <Link 
           to={`/posts/${post._id}`} 
           className="read-more-link w-full mt-auto"

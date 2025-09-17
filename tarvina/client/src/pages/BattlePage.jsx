@@ -7,8 +7,7 @@ export default function BattlePage() {
   const [winner, setWinner] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Eşleşmeleri yükle
-  // localStorage'daki token değiştiğinde yeniden çalışır
+
   useEffect(() => {
     const fetchMatches = async () => {
       setIsLoading(true);
@@ -25,7 +24,7 @@ export default function BattlePage() {
     };
 
     fetchMatches();
-  }, [localStorage.getItem('token')]); // Token değişimini dinle
+  }, [localStorage.getItem('token')]); 
 
   // Oy kullanma
   const handleVote = async (matchId, choice) => {
@@ -45,7 +44,7 @@ export default function BattlePage() {
     }
   };
 
-  // Sonraki turu başlat
+
   const handleNextRound = async () => {
     try {
       const res = await api.post("/matches/next-round", { currentRound });
@@ -100,7 +99,7 @@ export default function BattlePage() {
           return (
             <div key={m._id} className="border p-4 rounded shadow">
               <div className="flex justify-between">
-                {/* Post A */}
+                
                 <div className="flex-1 text-center">
                   <h2 className="text-lg font-semibold">{m.postA?.title}</h2>
                   <button
@@ -116,7 +115,6 @@ export default function BattlePage() {
                   </p>
                 </div>
 
-                {/* Post B */}
                 <div className="flex-1 text-center">
                   <h2 className="text-lg font-semibold">{m.postB?.title}</h2>
                   <button

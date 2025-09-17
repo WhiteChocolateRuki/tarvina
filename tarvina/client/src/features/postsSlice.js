@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../services/api";
 
-// GET POSTS
+// GET posts
 export const fetchPosts = createAsyncThunk(
   "posts/fetch",
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await api.get("/posts");
-      return data; // [{...}]
+      return data; 
     } catch (err) {
       return rejectWithValue(err.response?.data || { message: "Post fetch failed" });
     }
   }
 );
 
-// CREATE POST
+// Create post
 export const createPost = createAsyncThunk(
   "posts/create",
   async (payload, { rejectWithValue }) => {
@@ -27,7 +27,7 @@ export const createPost = createAsyncThunk(
   }
 );
 
-// UPDATE POST
+// Update post
 export const updatePost = createAsyncThunk(
   "posts/update",
   async ({ id, updates }, { rejectWithValue }) => {
@@ -40,7 +40,7 @@ export const updatePost = createAsyncThunk(
   }
 );
 
-// DELETE POST
+// Delete post
 export const deletePost = createAsyncThunk(
   "posts/delete",
   async (id, { rejectWithValue }) => {
@@ -59,7 +59,7 @@ const postsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // FETCH
+      // Fetch
       .addCase(fetchPosts.pending, (s) => {
         s.loading = true;
         s.error = null;
@@ -73,18 +73,18 @@ const postsSlice = createSlice({
         s.error = a.payload?.message || "Bir hata oluştu";
       })
 
-      // CREATE
+      // Create
       .addCase(createPost.fulfilled, (s, a) => {
-        s.items.unshift(a.payload); // yeni yazıyı başa ekle
+        s.items.unshift(a.payload); // yeni yazı başa eklenir
       })
 
-      // UPDATE
+      // Update
       .addCase(updatePost.fulfilled, (s, a) => {
         const i = s.items.findIndex((p) => p._id === a.payload._id);
         if (i !== -1) s.items[i] = a.payload;
       })
 
-      // DELETE
+      // Delete
       .addCase(deletePost.fulfilled, (s, a) => {
         s.items = s.items.filter((p) => p._id !== a.payload);
       });

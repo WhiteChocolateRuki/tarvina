@@ -10,23 +10,23 @@ export default function Dashboard() {
   const [form, setForm] = useState({ title: "", content: "", category: "" });
   const [editingId, setEditingId] = useState(null);
 
-  // 🔎 Debug log
+
   useEffect(() => {
     console.log("🔎 user object:", user);
     console.log("🔎 allPosts:", allPosts);
   }, [user, allPosts]);
 
-  // Kullanıcının sadece kendi yazılarını filtrele
+ 
   const userPosts = allPosts.filter((post) => {
     let postAuthorId = null;
 
     if (typeof post.authorId === "string") {
-      postAuthorId = post.authorId; // sadece string id
+      postAuthorId = post.authorId; 
     } else if (post.authorId && typeof post.authorId === "object") {
-      postAuthorId = post.authorId._id; // populate edilmiş obje
+      postAuthorId = post.authorId._id; 
     }
 
-    const userId = user?._id || user?.id; // 🔑 hangisi varsa onu al
+    const userId = user?._id || user?.id;
     return postAuthorId?.toString() === userId?.toString();
   });
 

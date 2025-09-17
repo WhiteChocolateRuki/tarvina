@@ -6,26 +6,25 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BattlePage from "./pages/BattlePage";
 import Feed from "./pages/Feed";
-import PostDetail from "./pages/PostDetail"; // 🔑 yeni import
+import PostDetail from "./pages/PostDetail";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <Routes>
-        {/* Herkese açık akış */}
+       
         <Route path="/" element={<Feed />} />
 
-        {/* Tek yazı sayfası */}
-        <Route path="/posts/:id" element={<PostDetail />} />  {/* 🔑 eklendi */}
+      
+        <Route path="/posts/:id" element={<PostDetail />} /> 
 
-        {/* Giriş/Kayıt */}
+        
         <Route path="/auth" element={<AuthPage />} />
 
-        {/* Battle sayfası */}
+
         <Route path="/battle" element={<BattlePage />} />
 
-        {/* Kullanıcıya özel panel */}
         <Route
           path="/dashboard"
           element={
