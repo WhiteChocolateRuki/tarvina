@@ -5,7 +5,7 @@ const BlogSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
-  image: { type: String }, // URL ya da base64 olabilir
+  image: { type: String }, 
   category: { type: String },
   createdAt: { type: Date, default: Date.now }
 });

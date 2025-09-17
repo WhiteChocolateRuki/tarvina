@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema({
   imageUrl: { type: String },
   authorId: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: "User",   // 🔑 Burada ilişki kurduk
+    ref: "User",   
     required: true
   },
 }, { timestamps: true });

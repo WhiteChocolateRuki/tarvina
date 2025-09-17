@@ -12,7 +12,7 @@ function validatePostInput(body) {
   return { ok: true };
 }
 
-// ✅ GET /api/posts → şampiyon + yazar bilgisi
+
 router.get("/", async (_req, res) => {
   try {
     const posts = await Post.find()
@@ -49,7 +49,7 @@ router.get("/", async (_req, res) => {
   }
 });
 
-// ✅ GET /api/posts/:id → tek yazı
+
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
@@ -64,8 +64,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// ✅ POST /api/posts → yeni yazı
-// ✅ POST /api/posts → yeni yazı
 router.post("/", auth, async (req, res) => {
   const v = validatePostInput(req.body);
   if (!v.ok) return res.status(400).json({ errors: v.errors });
@@ -81,15 +79,15 @@ router.post("/", auth, async (req, res) => {
     });
     await doc.populate("authorId", "name");
 
-    // 🔹 Yeni yazıyı otomatik eşleştirme mantığı
+    
     const allMatches = await Match.find();
     const usedPostIds = allMatches.flatMap(m => [m.postA, m.postB].filter(Boolean));
 
-    // Henüz hiç eşleşmemiş başka bir yazı bul
+  
     const unmatched = await Post.findOne({ _id: { $nin: usedPostIds, $ne: doc._id } });
 
     if (unmatched) {
-      // Yeni eşleşme başlat
+  
       await Match.create({
         postA: unmatched._id,
         postB: doc._id,
@@ -120,7 +118,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 
-// ✅ PUT /api/posts/:id → güncelle
+
 router.put("/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -139,12 +137,12 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
-// ✅ DELETE /api/posts/:id → sil
+// DELETE 
 router.delete("/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ error: "Yazı bulunamadı" });
-    if (post.authorId.toString() !== req.user._id) // ✅ id yerine _id
+    if (post.authorId.toString() !== req.user._id) 
       return res.status(403).json({ error: "Bu yazıyı silme yetkin yok" });
 
     await post.deleteOne();

@@ -8,7 +8,7 @@ function isEmail(str) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
 }
 
-// POST /api/auth/register
+
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body || {};
@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
       passwordHash,
     });
 
-    // ✅ JWT payload artık _id ile
+   
     const token = jwt.sign(
       { _id: u._id, name: u.name },
       process.env.JWT_SECRET,
@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
     res.json({
       token,
       user: {
-        _id: u._id,  // ✅ id yerine _id
+        _id: u._id, 
         name: u.name,
         email: u.email,
       },
@@ -51,7 +51,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// POST /api/auth/login
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body || {};
@@ -65,14 +65,14 @@ router.post("/login", async (req, res) => {
     if (!ok) return res.status(400).json({ error: "bilgiler hatalı" });
 
     const token = jwt.sign(
-      { _id: u._id, name: u.name },   // ✅ burada da _id
+      { _id: u._id, name: u.name },  
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
     res.json({
       token,
-      user: { _id: u._id, name: u.name, email: u.email }, // ✅ id yerine _id
+      user: { _id: u._id, name: u.name, email: u.email },
     });
   } catch (e) {
     console.error(e);
@@ -80,9 +80,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// GET /api/auth/me
 router.get("/me", requireAuth, async (req, res) => {
-  const u = await User.findById(req.user._id).select("_id name email createdAt"); // ✅ id yerine _id
+  const u = await User.findById(req.user._id).select("_id name email createdAt"); 
   res.json({ user: u });
 });
 

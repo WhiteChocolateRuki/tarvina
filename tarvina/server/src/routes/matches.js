@@ -5,7 +5,7 @@ const Match = require("../models/Match");
 const Post = require("../models/Post");
 const auth = require("../middleware/authMiddleware");
 
-// 🔹 İlk turu başlat
+
 router.post("/start", auth, async (req, res) => {
   try {
     const existing = await Match.find({ round: 1 });
@@ -38,7 +38,6 @@ router.post("/start", auth, async (req, res) => {
       }
     }
 
-    // Tek kalan varsa bye ile otomatik üst tura
     if (candidates.length > 0) {
       await Match.create({
         postA: candidates[0],
@@ -63,36 +62,35 @@ router.post("/start", auth, async (req, res) => {
   }
 });
 
-// 🔹 Oy kullanma veya güncelleme
-// 🔹 Oy kullanma veya güncelleme
+
 router.post("/votes/:id", auth, async (req, res) => {
   try {
-    const { choice } = req.body; // "A" veya "B"
+    const { choice } = req.body; 
     const match = await Match.findById(req.params.id);
     if (!match) return res.status(404).json({ error: "Eşleşme bulunamadı" });
 
-    const userId = req.user._id; // bu ObjectId
+    const userId = req.user._id; 
 
-    // Önceki oyu bul (votesByPost üzerinden)
+    
     const prevVote = match.votesByPost.find(v => v.voter.toString() === userId.toString());
 
     if (prevVote) {
-      // Önceki oy sayısını azalt
+   
       if (prevVote.choice === "A") match.votesA--;
       if (prevVote.choice === "B") match.votesB--;
 
-      // Güncelle
+     
       prevVote.choice = choice;
     } else {
-      // Yeni oy
+     
       match.votesByPost.push({ voter: userId, choice });
     }
 
-    // Yeni oyu artır
+  
     if (choice === "A") match.votesA++;
     if (choice === "B") match.votesB++;
 
-    // voters listesine kullanıcıyı ekle (ObjectId olarak)
+
     if (!match.voters.some(v => v.toString() === userId.toString())) {
       match.voters.push(new mongoose.Types.ObjectId(userId));
     }
@@ -107,7 +105,6 @@ router.post("/votes/:id", auth, async (req, res) => {
 });
 
 
-// 🔹 Bir üst turu başlat
 router.post("/next-round", auth, async (req, res) => {
   try {
     const { currentRound } = req.body;
@@ -116,7 +113,7 @@ router.post("/next-round", auth, async (req, res) => {
       return res.status(400).json({ error: "Bu round bulunamadı" });
     }
 
-    // Tüm maçlara en az bir oy verilmiş mi?
+   
     const allMatchesVoted = matches.every(m => m.votesA + m.votesB > 0);
     if (!allMatchesVoted) {
       return res.status(400).json({ error: "Tüm eşleşmelerde en az bir oy olmalı." });
@@ -130,7 +127,6 @@ router.post("/next-round", auth, async (req, res) => {
 
     const winners = matches.map(m => m.winner).filter(Boolean);
 
-    // Şampiyon kontrolü
     if (winners.length === 1) {
       const finalWinner = await Post.findById(winners[0])
         .populate("authorId", "name email");
@@ -189,7 +185,7 @@ router.post("/next-round", auth, async (req, res) => {
   }
 });
 
-// 🔹 Belirli round’daki eşleşmeleri getir
+
 router.get("/round/:round", auth, async (req, res) => {
   try {
     const round = parseInt(req.params.round, 10);
