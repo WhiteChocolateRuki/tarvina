@@ -1,1 +1,1 @@
-node_modules klasörü çokfazla dosya olduğu için eklenmedi. Zaten bu dosyada da bir değişiklik yapılmadı.
+node_modules klasörü çok fazla dosya olduğu için eklenmedi. Zaten bu dosyada da bir değişiklik yapılmadı.
