@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        josefin: ["Josefin Sans", "sans-serif"], // ✅ Senin özel fontun
+        josefin: ["Josefin Sans", "sans-serif"],
       },
     },
   },
